@@ -7,14 +7,16 @@ import { Tables } from '../middlewares/helpers/database.types.ts';
 
 // get account from my db
 const getAccount = async ({ supabase }: Request, phoneNumber: string) => {
+  console.log('Getting account', phoneNumber);
   const { data, error } = await supabase.from('accounts')
     .select('*')
-    .eq('account_number', phoneNumber)
+    .eq('account_number', '19735836187')
     .single<Tables<'accounts'>>();
   if (error) {
     console.error('Error fetching account', error);
     return null;
   }
+  console.log(data);
   // get account from db
   // return account
   return {
@@ -57,16 +59,18 @@ enum TextUpdates {
   WHATSAPP = 'whatsapp',
 }
 router.post('/', async (req, res) => {
-  console.log(req.body);
   const supabase = req.supabase;
   const {
     NumMedia: numMedia,
-    From: from,
+    From,
     Body: body,
     MessageSid: messageSid,
     AccountSid: accountSid,
     To: to,
   } = req.body;
+  // strip non numeric characters from phone number
+  const from = From.replace(/\D/g, '');
+
   // log body
   const account = await getAccount(req, from);
   const twilioMl = new MessagingResponse();
