@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    /* Base Options: */
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "target": "es2022",
+    "allowJs": true,
+    "moduleDetection": "force",
+    "module": "NodeNext",
+    "allowImportingTsExtensions": true,
+    "emitDeclarationOnly": true,
+    "declaration": true,
+    "isolatedModules": true,
+    "moduleResolution":"nodenext",
+    /* Strictness */
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+
+    /* If transpiling with TypeScript: */
+    "outDir": "dist",
+
+
+    /* If your code doesn't run in the DOM: */
+    "lib": ["es2022"]
+  }
+}
